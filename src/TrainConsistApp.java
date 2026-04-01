@@ -1,7 +1,9 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * UC9: Group Bogies by Type
+ */
 public class TrainConsistApp {
 
     public static void main(String[] args) {
@@ -10,19 +12,24 @@ public class TrainConsistApp {
 
         List<bogie> bogies = new ArrayList<>();
 
-        // Add bogies
-        bogies.add(new bogie("Sleeper", 72));
-        bogies.add(new bogie("AC Chair", 60));
-        bogies.add(new bogie("First Class", 40));
+        // Add bogies with type
+        bogies.add(new bogie("Sleeper", 72, "Passenger"));
+        bogies.add(new bogie("AC Chair", 60, "Passenger"));
+        bogies.add(new bogie("Cargo", 100, "Goods"));
+        bogies.add(new bogie("Parcel", 80, "Goods"));
 
-        // Stream filtering (capacity > 60)
-        List<bogie> filteredBogies = bogies.stream()
-                .filter(b -> b.getCapacity() > 60)
-                .collect(Collectors.toList());
+        // Grouping
+        Map<String, List<bogie>> grouped = bogies.stream()
+                .collect(Collectors.groupingBy(bogie::getType));
 
-        System.out.println("\nFiltered Bogies (Capacity > 60):");
-        for (bogie b : filteredBogies) {
-            b.display();
+        // Display result
+        System.out.println("\nGrouped Bogies:");
+
+        for (String type : grouped.keySet()) {
+            System.out.println("\nType: " + type);
+            for (bogie b : grouped.get(type)) {
+                b.display();
+            }
         }
     }
 }
