@@ -1,10 +1,10 @@
-import java.util.LinkedList;
+import java.util.LinkedHashSet;
 
 /**
  * Class: TrainConsistApp
  *
- * UC4: Maintain Ordered Bogie IDs using LinkedList
- * Demonstrates insertion, deletion, and order maintenance.
+ * UC5: Preserve Insertion Order of Bogies using LinkedHashSet
+ * Demonstrates uniqueness + order preservation.
  */
 public class TrainConsistApp {
 
@@ -12,34 +12,22 @@ public class TrainConsistApp {
 
         System.out.println("=== Train Consist Management App ===");
 
-        // Create LinkedList for train consist
-        LinkedList<String> train = new LinkedList<>();
+        // Create LinkedHashSet for train formation
+        LinkedHashSet<String> train = new LinkedHashSet<>();
 
         // 1️⃣ Add bogies
         train.add("Engine");
         train.add("Sleeper");
-        train.add("AC");
         train.add("Cargo");
         train.add("Guard");
 
-        System.out.println("\nInitial Train:");
+        // 2️⃣ Attempt duplicate insertion
+        train.add("Sleeper"); // duplicate
+
+        // 3️⃣ Display final formation
+        System.out.println("\nFinal Train Formation:");
         System.out.println(train);
 
-        // 2️⃣ Insert Pantry Car at position 2
-        train.add(2, "Pantry");
-
-        System.out.println("\nAfter Adding Pantry at position 2:");
-        System.out.println(train);
-
-        // 3️⃣ Remove first and last bogie
-        train.removeFirst();
-        train.removeLast();
-
-        System.out.println("\nAfter Removing First and Last Bogie:");
-        System.out.println(train);
-
-        // Final consist
-        System.out.println("\nFinal Train Consist:");
-        System.out.println(train);
+        System.out.println("\nProgram running...");
     }
 }
