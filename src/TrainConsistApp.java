@@ -1,34 +1,27 @@
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
-/**
- * UC7: Sort Bogies by Capacity using Comparator
- */
 public class TrainConsistApp {
 
     public static void main(String[] args) {
 
         System.out.println("=== Train Consist Management App ===");
 
-        // Create list of bogies
         List<bogie> bogies = new ArrayList<>();
 
-        // Add bogie objects
+        // Add bogies
         bogies.add(new bogie("Sleeper", 72));
         bogies.add(new bogie("AC Chair", 60));
         bogies.add(new bogie("First Class", 40));
 
-        System.out.println("\nBefore Sorting:");
-        for (bogie b : bogies) {
-            b.display();
-        }
+        // Stream filtering (capacity > 60)
+        List<bogie> filteredBogies = bogies.stream()
+                .filter(b -> b.getCapacity() > 60)
+                .collect(Collectors.toList());
 
-        // Sort using Comparator (lambda)
-        bogies.sort(Comparator.comparingInt(bogie::getCapacity));
-
-        System.out.println("\nAfter Sorting by Capacity:");
-        for (bogie b : bogies) {
+        System.out.println("\nFiltered Bogies (Capacity > 60):");
+        for (bogie b : filteredBogies) {
             b.display();
         }
     }
