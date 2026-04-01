@@ -1,11 +1,10 @@
-import java.util.HashSet;
-import java.util.Set;
+import java.util.LinkedList;
 
 /**
  * Class: TrainConsistApp
  *
- * UC3: Track Unique Bogie IDs using HashSet
- * Demonstrates how duplicates are automatically ignored.
+ * UC4: Maintain Ordered Bogie IDs using LinkedList
+ * Demonstrates insertion, deletion, and order maintenance.
  */
 public class TrainConsistApp {
 
@@ -13,30 +12,34 @@ public class TrainConsistApp {
 
         System.out.println("=== Train Consist Management App ===");
 
-        // Create HashSet to store unique bogie IDs
-        Set<String> bogieIds = new HashSet<>();
+        // Create LinkedList for train consist
+        LinkedList<String> train = new LinkedList<>();
 
-        // 1️⃣ Add bogie IDs
-        bogieIds.add("B1");
-        bogieIds.add("B2");
-        bogieIds.add("B3");
-        bogieIds.add("B1"); // duplicate
-        bogieIds.add("B2"); // duplicate
+        // 1️⃣ Add bogies
+        train.add("Engine");
+        train.add("Sleeper");
+        train.add("AC");
+        train.add("Cargo");
+        train.add("Guard");
 
-        System.out.println("\nBogie IDs after insertion (duplicates ignored):");
-        System.out.println(bogieIds);
+        System.out.println("\nInitial Train:");
+        System.out.println(train);
 
-        // 2️⃣ Try adding another duplicate
-        boolean isAdded = bogieIds.add("B3");
+        // 2️⃣ Insert Pantry Car at position 2
+        train.add(2, "Pantry");
 
-        if (!isAdded) {
-            System.out.println("\nDuplicate B3 was not added.");
-        }
+        System.out.println("\nAfter Adding Pantry at position 2:");
+        System.out.println(train);
 
-        // Final unique set
-        System.out.println("\nFinal Unique Bogie IDs:");
-        System.out.println(bogieIds);
+        // 3️⃣ Remove first and last bogie
+        train.removeFirst();
+        train.removeLast();
 
-        System.out.println("\nProgram running...");
+        System.out.println("\nAfter Removing First and Last Bogie:");
+        System.out.println(train);
+
+        // Final consist
+        System.out.println("\nFinal Train Consist:");
+        System.out.println(train);
     }
 }
