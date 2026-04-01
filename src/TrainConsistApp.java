@@ -1,10 +1,9 @@
-import java.util.LinkedHashSet;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 /**
- * Class: TrainConsistApp
- *
- * UC5: Preserve Insertion Order of Bogies using LinkedHashSet
- * Demonstrates uniqueness + order preservation.
+ * UC7: Sort Bogies by Capacity using Comparator
  */
 public class TrainConsistApp {
 
@@ -12,22 +11,25 @@ public class TrainConsistApp {
 
         System.out.println("=== Train Consist Management App ===");
 
-        // Create LinkedHashSet for train formation
-        LinkedHashSet<String> train = new LinkedHashSet<>();
+        // Create list of bogies
+        List<bogie> bogies = new ArrayList<>();
 
-        // 1️⃣ Add bogies
-        train.add("Engine");
-        train.add("Sleeper");
-        train.add("Cargo");
-        train.add("Guard");
+        // Add bogie objects
+        bogies.add(new bogie("Sleeper", 72));
+        bogies.add(new bogie("AC Chair", 60));
+        bogies.add(new bogie("First Class", 40));
 
-        // 2️⃣ Attempt duplicate insertion
-        train.add("Sleeper"); // duplicate
+        System.out.println("\nBefore Sorting:");
+        for (bogie b : bogies) {
+            b.display();
+        }
 
-        // 3️⃣ Display final formation
-        System.out.println("\nFinal Train Formation:");
-        System.out.println(train);
+        // Sort using Comparator (lambda)
+        bogies.sort(Comparator.comparingInt(bogie::getCapacity));
 
-        System.out.println("\nProgram running...");
+        System.out.println("\nAfter Sorting by Capacity:");
+        for (bogie b : bogies) {
+            b.display();
+        }
     }
 }
