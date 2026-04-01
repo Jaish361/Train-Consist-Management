@@ -1,28 +1,18 @@
-import org.junit.jupiter.api.Test;
-import java.util.*;
-import java.util.stream.Collectors;
+@Test
+void testGroupbogiesByType() {
 
-import static org.junit.jupiter.api.Assertions.*;
+    List<bogie> bogies = Arrays.asList(
+            new bogie("Sleeper", 72, "Passenger"),
+            new bogie("AC Chair", 60, "Passenger"),
+            new bogie("Cargo", 100, "Goods")
+    );
 
-class TrainConsistAppTest {
+    Map<String, List<bogie>> result = bogies.stream()
+            .collect(Collectors.groupingBy(Bogie::getType));
 
-    @Test
-    void testFilterBogiesByCapacity() {
+    // Check Passenger group
+    assertEquals(2, result.get("Passenger").size());
 
-        // Arrange (Input)
-        List<bogie> bogies = Arrays.asList(
-                new bogie("Sleeper", 72),
-                new bogie("AC Chair", 60),
-                new bogie("First Class", 40)
-        );
-
-        // Act (Processing)
-        List<bogie> result = bogies.stream()
-                .filter(b -> b.getCapacity() > 60)
-                .collect(Collectors.toList());
-
-        // Assert (Expected vs Actual)
-        assertEquals(1, result.size());
-        assertEquals("Sleeper", result.get(0).getName());
-    }
+    // Check Goods group
+    assertEquals(1, result.get("Goods").size());
 }
