@@ -1,11 +1,11 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Class: TrainConsistApp
  *
- * UC2: Add Passenger Bogies to Train using ArrayList
- * Demonstrates CRUD operations (Create, Read, Delete, Check)
+ * UC3: Track Unique Bogie IDs using HashSet
+ * Demonstrates how duplicates are automatically ignored.
  */
 public class TrainConsistApp {
 
@@ -13,33 +13,29 @@ public class TrainConsistApp {
 
         System.out.println("=== Train Consist Management App ===");
 
-        // Create ArrayList to store bogies
-        List<String> trainConsist = new ArrayList<>();
+        // Create HashSet to store unique bogie IDs
+        Set<String> bogieIds = new HashSet<>();
 
-        // 1️⃣ Add bogies (CREATE)
-        trainConsist.add("Sleeper");
-        trainConsist.add("AC Chair");
-        trainConsist.add("First Class");
+        // 1️⃣ Add bogie IDs
+        bogieIds.add("B1");
+        bogieIds.add("B2");
+        bogieIds.add("B3");
+        bogieIds.add("B1"); // duplicate
+        bogieIds.add("B2"); // duplicate
 
-        System.out.println("\nAfter Adding Bogies:");
-        System.out.println(trainConsist);
+        System.out.println("\nBogie IDs after insertion (duplicates ignored):");
+        System.out.println(bogieIds);
 
-        // 2️⃣ Remove a bogie (DELETE)
-        trainConsist.remove("AC Chair");
+        // 2️⃣ Try adding another duplicate
+        boolean isAdded = bogieIds.add("B3");
 
-        System.out.println("\nAfter Removing AC Chair:");
-        System.out.println(trainConsist);
-
-        // 3️⃣ Check existence (READ / CHECK)
-        if (trainConsist.contains("Sleeper")) {
-            System.out.println("\nSleeper bogie exists in the train.");
-        } else {
-            System.out.println("\nSleeper bogie not found.");
+        if (!isAdded) {
+            System.out.println("\nDuplicate B3 was not added.");
         }
 
-        // Final state
-        System.out.println("\nFinal Train Consist:");
-        System.out.println(trainConsist);
+        // Final unique set
+        System.out.println("\nFinal Unique Bogie IDs:");
+        System.out.println(bogieIds);
 
         System.out.println("\nProgram running...");
     }
